@@ -1,38 +1,39 @@
 <template>
   <div id="app">
-    <Page @saveNote="saveNote" @deleteNote="deleteNote"/>
-    <PageList :pages="notes" @changePage="changePage"/>
+    <Page />
+    <PageList :pages="notes"/>
   </div>
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 import Page from "@/components/Page";
 import PageList from "@/components/PageList";
 
 export default {
   name: 'app',
-  data() {
-    return {
-      notes: [],
-      index: 0
-    }
-  },
   components: {
     Page,
     PageList
   },
   methods: {
-    saveNote(note) {
-      this.notes.push(note);
-      this.index = this.notes.length - 1;
-    },
+    ...mapGetters(["getNotes"]),
     deleteNote() {
       this.notes.slice(this.index, 1);
       this.index = Math.max(this.index - 1, 0);
-    },
-    changePage(index) {
-      this.index = index;
       console.log(this.index);
+    },
+   
+    addPage() {
+      console.log(this.notes);
+      this.notes.push({title: "", note: ""});
+      this.index = this.notes.length - 1;
+    }
+  },
+  computed: {
+    notes() {
+      return this.getNotes();
     }
   }
 }

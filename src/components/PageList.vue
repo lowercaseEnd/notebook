@@ -8,6 +8,7 @@
         <p>{{page.note}}</p>
       </li>
     </ul>
+    <button @click="addPage">Add an empty page</button>
   </section>
 </template>
 
@@ -16,7 +17,10 @@ export default {
   props: ["pages"],
   methods: {
     changePage(index) {
-      this.$emit("changePage", index);
+      this.$store.commit("changePage", index);
+    },
+    addPage() {
+      this.$store.commit("addPage");
     }
   }
 }

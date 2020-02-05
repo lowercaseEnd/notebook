@@ -21,11 +21,11 @@ export default {
   },
   methods: {
     saveNote() {
-      this.$emit("saveNote", {title: this.title, note: this.note});
+      this.$store.commit("saveNote", {title: this.title, note: this.note});
       this.note = this.title = "";
     },
     deleteNote() {
-      this.$emit("deleteNote");
+      this.$store.commit("deleteNote");
     }
   }
 }
