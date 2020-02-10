@@ -9,21 +9,25 @@ export default {
       ref && ref.remove();
       context.commit("deleteNote");
     },
+    createNoteDB(context, data) {
+      let page = {};
+      context.dispatch("insertNewPage", {page: page, data: data})
+    },
     saveNoteDB(context, data) {
       let page = context.state.notes[context.state.index];
       if(page !== undefined && page.ref) {
         context.dispatch("updateExistingPage", {page: page, data: data});
       } else {
-        context.dispatch("insertNewPage", {page: page, data: data});
+        context.dispatch("insertNewPage", {page: {}, data: data});
       }
     },
     updateExistingPage(context, {page, data}) {
       page.ref.update({title: data.title, note: data.note});
-      context.commit("changeNote", page);
+      context.commit("changeNote", {title: data.title, note: data.note, ref: page.ref});
     },
-    async insertNewPage(context, {page, data}) {
-      page.ref = await context.rootState.db.database.push(data);
-      context.commit("saveNote", page);
+    insertNewPage(context, {page, data}) {
+      page.ref = context.rootState.db.database.push(data);
+      context.commit("saveNote", {title: data.title, note: data.note, ref: page.ref});
     }
   },
   mutations: {
@@ -40,10 +44,6 @@ export default {
     deleteNote(state) {
       state.notes.splice(state.index, 1);
       state.index = Math.max(state.index - 1, 0);
-    },
-    addPage(state) {
-      state.notes.push({title: "", note: ""});
-      state.index = state.notes.length - 1;
     }
   },
   getters: {
