@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 export default {
   state: {
     notes: [],
@@ -36,7 +38,8 @@ export default {
       state.index = state.notes.length - 1;
     },
     changeNote(state, note) {
-      state.notes[state.index] = note;
+      Vue.set(state.notes, state.index, note);
+      // state.notes[state.index] = note;
     },
     changePage(state, index) {
       state.index = index;
