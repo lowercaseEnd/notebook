@@ -105,4 +105,7 @@
     
     cursor: pointer;
   }
+  .note-button:hover {
+     background-color: #276f80;
+  }
 </style>
