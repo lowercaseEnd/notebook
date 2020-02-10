@@ -77,14 +77,12 @@
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
+    font-size: 16px;
   }
   .content {
     resize: vertical;
     
     min-height: 200px;
-  }
-  .title {
-    font-size: 20px;
   }
   .note-label {
     display: inline-block;

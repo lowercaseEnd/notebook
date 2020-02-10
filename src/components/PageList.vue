@@ -5,7 +5,7 @@
       v-for="(page, index) in pages" :key="index"
       @click="changePage(index)"
       v-bind:class="{ 'active': index === activePage }">
-        <h2>{{page.title}}</h2>
+        <h2 class="notes-list__title">{{page.title}}</h2>
         <p>{{page.note}}</p>
       </li>
     </ul>
@@ -47,6 +47,9 @@ export default {
     padding: 0;
     margin: 0;
     height: 100%;
+  }
+  .notes-list__title {
+    margin: 0;
   }
   .notes-list__item {
     padding: 10px;

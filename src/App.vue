@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="app" id="app">
     <Page />
     <PageList :pages="notes"/>
   </div>
@@ -36,7 +36,7 @@ export default {
   computed: {
     notes() {
       return this.getNotes();
-    }
+    },
   }
 }
 </script>
@@ -45,8 +45,16 @@ export default {
   body, html {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     font-size: 16px;
+    margin: 0;
+    padding: 0;
+    height: 100%;
   }
   *, *::before, *::after {
     box-sizing: border-box;
+  }
+  .app {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 100%;
   }
 </style>
