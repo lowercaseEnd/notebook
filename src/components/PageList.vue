@@ -20,7 +20,7 @@ export default {
       this.$store.commit("changePage", index);
     },
     addPage() {
-      this.$store.commit("addPage");
+      this.$store.dispatch("saveNoteDB", {title: "", note: ""});
     }
   }
 }

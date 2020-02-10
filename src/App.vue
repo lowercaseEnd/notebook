@@ -7,29 +7,31 @@
 
 <script>
 import {mapGetters} from "vuex";
+import firebase from "firebase";
 
 import Page from "@/components/Page";
 import PageList from "@/components/PageList";
 
+
 export default {
   name: 'app',
+  mounted() {
+    this.getDatabase().once("value", (notes) => {
+      notes.forEach(note => {
+        this.$store.commit("saveNote", {
+          ref: note.ref,
+          title: note.child("title").val(),
+          note: note.child("note").val()
+        });
+      });
+    });
+  },
   components: {
     Page,
     PageList
   },
   methods: {
-    ...mapGetters(["getNotes"]),
-    deleteNote() {
-      this.notes.slice(this.index, 1);
-      this.index = Math.max(this.index - 1, 0);
-      console.log(this.index);
-    },
-   
-    addPage() {
-      console.log(this.notes);
-      this.notes.push({title: "", note: ""});
-      this.index = this.notes.length - 1;
-    }
+    ...mapGetters(["getNotes", "getDatabase"]),
   },
   computed: {
     notes() {
