@@ -1,5 +1,6 @@
 <template>
   <div class="app" id="app">
+    <Search />
     <Page />
     <PageList :pages="notes"/>
   </div>
@@ -11,6 +12,7 @@ import firebase from "firebase";
 
 import Page from "@/components/Page";
 import PageList from "@/components/PageList";
+import Search from "@/components/Search";
 
 
 export default {
@@ -28,7 +30,8 @@ export default {
   },
   components: {
     Page,
-    PageList
+    PageList,
+    Search
   },
   methods: {
     ...mapGetters(["getNotes", "getDatabase"]),
