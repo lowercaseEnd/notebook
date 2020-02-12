@@ -17,7 +17,7 @@ export default {
   methods: {
     search() {
       this.$store.dispatch("searchDB", this.query);
-      console.log(this.$store.getters.getResponse.child("title"));
+      // console.log(this.$store.getters.getResponse);
     }
   }
 }
