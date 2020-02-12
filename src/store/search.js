@@ -1,17 +1,24 @@
 export default {
   state: {
-    response: {}
+    response: []
   },
   actions: {
-    async searchDB(context, query) {
-      // let res = await context.rootState.db.database.startAt(query)
-      // .endAt(query+"\uf8ff").val();
-      let res;
-      await context.rootState.db.database.orderByChild("title").startAt(query).endAt(query+"\uf8ff").on("value", (result) => {
-        console.log(result.val());
-        res = result.val();
+    searchDB(context, query) {
+      return new Promise(resolve => {
+        let temp = [];
+        context.rootState.db.database.orderByChild("title").startAt(query).endAt(query+"\uf8ff").on("value", (result) => {
+          result.forEach(res => {
+            temp.push({
+              ref: res.ref,
+              title: res.child("title").val(),
+              note: res.child("note").val()
+            })
+          })
+          context.commit("saveResponse", temp);
+          resolve();
+        })
       })
-      context.commit("saveResponse", res);
+      
     }
   },
   mutations: {

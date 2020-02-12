@@ -47,6 +47,7 @@ export default {
     padding: 0;
     margin: 0;
     height: 100%;
+    overflow-y: auto;
   }
   .notes-list__title {
     margin: 0;
